@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Leaf } from 'lucide-react';
+import { ShieldCheck, Leaf, Dot, CircleCheck } from 'lucide-react';
 import Image from 'next/image';
 
 const Hero = () => {
@@ -12,13 +12,13 @@ const Hero = () => {
   return (
     <div className="relative overflow-hidden bg-white">
       {/* Soft radial accent, navy-tinted */}
-      <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-[#8FBCE8]/20 rounded-full blur-3xl -translate-y-1/3 translate-x-1/4" />
+      {/* <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-[#8FBCE8]/20 rounded-full  -translate-y-1/3 translate-x-1/4" /> */}
 
       <div className="relative max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
         {/* Left: copy */}
         <div className="text-center md:text-left">
-          <span className="inline-flex items-center gap-2 bg-[#0F3457]/5 text-[#0F3457] text-xs font-semibold px-4 py-2 rounded-full mb-5">
-            <Leaf size={14} />
+          <span className="inline-flex items-center gap-2 bg-[#0F3457]/15 text-[#0F3457] text-sm font-semibold px-4 py-2 rounded-full mb-5">
+            <ShieldCheck size={14} />
             অস্টিওআর্থ্রাইটিসের যত্নে বিজ্ঞানসম্মত সমাধান
           </span>
 
@@ -37,9 +37,9 @@ const Hero = () => {
             {badges.map((badge) => (
               <span
                 key={badge}
-                className="flex items-center gap-1.5 bg-[#F1F5F9] text-[#0F3457] text-xs font-medium px-3 py-1.5 rounded-md"
+                className="flex items-center gap-1.5 bg-[#F1F5F9] text-[#0F3457] text-xs font-semibold px-3 py-1.5 rounded-md"
               >
-                <ShieldCheck size={13} />
+                <CircleCheck size={13} />
                 {badge}
               </span>
             ))}
@@ -63,7 +63,7 @@ const Hero = () => {
 
         {/* Right: product image */}
 <div className="relative flex items-center justify-center w-full">
-  <div className="absolute w-72 h-72 bg-[#8FBCE8]/25 rounded-full blur-2xl" />
+  <div className="absolute w-172 h-120 bg-[#8FBCE8]/25 rounded-full blur-3xl" />
   <Image
     src="/jg2-removebg-preview_upscaled.png"
     width={340}
