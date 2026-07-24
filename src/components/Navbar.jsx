@@ -34,7 +34,9 @@ const Navbar = () => {
             </a>
             <h2 className="font-serif text-md md:text-xl font-bold text-[#081C30]"><a href="#home">তাহদীথ শপ</a></h2>
           </div>
-          <Chip color="warning" variant="primary">কারকুমা জয়েন্ট গার্ড</Chip>
+          <div className="hidden md:flex items-center gap-6">
+            <Chip color="warning" variant="primary">কারকুমা জয়েন্ট গার্ড</Chip>
+          </div>
 
           {/* Order Button */}
           <Link href="#cart" className="flex items-center gap-2 bg-[#1D4F91] hover:bg-[#163d70] text-white px-4 py-2 md:px-6 md:py-2 rounded-full transition">

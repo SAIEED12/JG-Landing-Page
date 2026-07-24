@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck, CircleCheck } from 'lucide-react';
 import Image from 'next/image';
+import { Chip } from '@heroui/react';
 
 const Hero = () => {
   const badges = [
@@ -48,11 +49,11 @@ const Hero = () => {
           {/* Price + CTA */}
           <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
             <span className="font-serif font-bold text-2xl text-[#0F3457]">
-              ৳২,১৭০
+              ৳২,১০০
             </span>
-            <span className="bg-[#0F3457] text-white text-xs font-bold px-3 py-1 rounded-full">
-              ৪% ছাড়
-            </span>
+            <Chip color="success" variant="primary" className="text-xs font-semibold">
+              Free Home Delivery
+            </Chip>
           </div>
 
           
