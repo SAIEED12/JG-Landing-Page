@@ -19,6 +19,9 @@ const notoSansBengali = Noto_Sans_Bengali({
 export const metadata = {
   title: "তাহদীথ শপ | Tahdith Shop",
   description: "The Organic Way of Life",
+  icons:{
+    icon: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({ children }) {
