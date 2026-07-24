@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
 import WhyChoose from "@/components/WhyChoose";
 
 
@@ -10,6 +11,9 @@ export default function Home() {
       </section>
       <section id="why-choose">
         <WhyChoose />
+      </section>
+      <section id="stats">
+        <Stats />
       </section>
 
       lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.

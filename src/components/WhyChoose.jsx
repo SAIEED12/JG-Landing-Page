@@ -18,7 +18,7 @@ const WhyChoose = () => {
   ];
 
   return (
-    <div className="bg-white py-16 md:py-24">
+    <div className="bg-[#feffff] shadow-lg py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-12 items-center">
         {/* Left: image */}
         <div className="order-2 md:order-1">

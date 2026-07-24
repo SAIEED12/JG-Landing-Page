@@ -33,6 +33,7 @@ const Navbar = () => {
             </a>
             <h2 className="font-serif text-md md:text-xl font-bold text-[#081C30]"><a href="#home">তাহদীথ শপ</a></h2>
           </div>
+          <h2 className="text-center">JG</h2>
 
           {/* Cart Button */}
           <Link href="#cart" className="flex items-center gap-2 bg-[#1D4F91] hover:bg-[#163d70] text-white px-4 py-2 md:px-6 md:py-2 rounded-full transition">

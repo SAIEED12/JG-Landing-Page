@@ -11,8 +11,8 @@ const Hero = () => {
 
   return (
     <div className="relative overflow-hidden bg-[#F8FAFC]">
-      {/* Soft radial accent, navy-tinted */}
-      {/* <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-[#8FBCE8]/20 rounded-full  -translate-y-1/3 translate-x-1/4" /> */}
+      {/* Soft radial accent, navy-tinted
+      <div className="absolute top-0 left-0 w-[420px] h-[420px] bg-[#8FBCE8]/20 rounded-full  -translate-y-1/3 translate-x-1/4 blur-3xl"/> */}
 
       <div className="relative max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
         {/* Left: copy */}
