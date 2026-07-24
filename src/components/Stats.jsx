@@ -15,7 +15,7 @@ const Stats = () => {
         {/* Section head */}
         <div className="max-w-2xl mx-auto text-center mb-12">
           <span className="items-center inline-block bg-white/10 text-[#8FBCE8] text-xs font-semibold px-4 py-2 rounded-full mb-5">
-           <div className='flex  gap-1'>
+           <div className='flex gap-2'>
            <Info size={14}/>  
            পরিসংখ্যান যা বলছে
            </div>

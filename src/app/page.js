@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import Ingredients from "@/components/Ingredients";
 import Stats from "@/components/Stats";
+import Trust from "@/components/Trust";
 import Usage from "@/components/Usage";
 import WhyChoose from "@/components/WhyChoose";
 
@@ -31,6 +32,10 @@ export default function Home() {
 
       <section id="Usage">
         <Usage/>
+      </section>
+
+      <section id="Trust">
+        <Trust/>
       </section>
 
       lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
