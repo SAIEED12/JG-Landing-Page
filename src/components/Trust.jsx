@@ -6,6 +6,7 @@ import {
   FlaskConical,
   Microscope,
   Factory,
+  CircleCheck,
 } from 'lucide-react';
 
 const Trust = () => {
@@ -48,7 +49,7 @@ const Trust = () => {
         {/* Section head */}
         <div className="max-w-2xl mx-auto text-center mb-12">
           <span className="inline-flex items-center gap-2 bg-[#0F3457]/5 text-[#0F3457] text-xs font-semibold px-4 py-2 rounded-full mb-5">
-            <ShieldCheck size={14} />
+            <CircleCheck size={14} />
             বিশ্বাসযোগ্যতা ও মানের নিশ্চয়তা
           </span>
           <h2 className="font-serif font-bold text-2xl md:text-4xl text-[#0F3457] leading-snug">
