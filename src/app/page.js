@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import Ingredients from "@/components/Ingredients";
 import Stats from "@/components/Stats";
+import Usage from "@/components/Usage";
 import WhyChoose from "@/components/WhyChoose";
 
 
@@ -11,17 +12,25 @@ export default function Home() {
       <section id="home">
         <Hero />
       </section>
+      
       <section id="why-choose">
         <WhyChoose />
       </section>
+      
       <section id="stats">
         <Stats />
       </section>
+      
       <section id="ingredients">
         <Ingredients/>
       </section>
+
       <section id="howItWorks">
         <HowItWorks/>
+      </section>
+
+      <section id="Usage">
+        <Usage/>
       </section>
 
       lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
