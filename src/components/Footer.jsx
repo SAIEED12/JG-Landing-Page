@@ -1,6 +1,6 @@
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
-import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import Image from 'next/image';
 
 const Footer = () => {
@@ -18,7 +18,8 @@ const Footer = () => {
   ];
 
   const socials = [
-    { Icon: FaFacebook, href: '#' },
+    { Icon: FaFacebook, href: 'https://www.facebook.com/TahdithShop' },
+    { Icon: FaWhatsapp, href: 'https://wa.me/8801673009016' },
     // { Icon: FaInstagram, href: '#' },
     // { Icon: FaYoutube, href: '#' },
   ];
@@ -73,18 +74,18 @@ const Footer = () => {
           <div>
             <h3 className="font-serif font-bold text-white text-sm mb-4">যোগাযোগ</h3>
             <ul className="flex flex-col gap-3">
-              <li className="flex items-center gap-2 font-sans text-white/60 text-sm">
+              <a href="tel:+8801673009016" className="flex items-center gap-2 font-sans text-white/60 text-sm hover:text-[#8FBCE8] transition-colors">
                 <Phone size={14} className="text-[#8FBCE8] shrink-0" />
                 +8801673-009016
-              </li>
-              <li className="flex items-center gap-2 font-sans text-white/60 text-sm">
+              </a>
+              <a href="mailto:tahdithShop@gmail.com" className="flex items-center gap-2 font-sans text-white/60 text-sm hover:text-[#8FBCE8] transition-colors">
                 <Mail size={14} className="text-[#8FBCE8] shrink-0" />
                 tahdithShop@gmail.com
-              </li>
-              <li className="flex items-start gap-2 font-sans text-white/60 text-sm">
+              </a>
+              <a href="https://maps.google.com/?q=Rupnagar,Mirpur,Dhaka,Bangladesh" className="flex items-start gap-2 font-sans text-white/60 text-sm hover:text-[#8FBCE8] transition-colors">
                 <MapPin size={14} className="text-[#8FBCE8] shrink-0 mt-0.5" />
                 ঢাকা, বাংলাদেশ
-              </li>
+              </a>
             </ul>
           </div>
         </div>
