@@ -1,3 +1,4 @@
+import Faq from "@/components/Faq";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import Ingredients from "@/components/Ingredients";
@@ -36,6 +37,10 @@ export default function Home() {
 
       <section id="Trust">
         <Trust/>
+      </section>
+
+      <section id="Faq">
+        <Faq/>
       </section>
 
       lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
