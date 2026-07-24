@@ -22,7 +22,7 @@ const Navbar = () => {
 
           {/* Logo */}
           <div className="flex items-center gap-3 cursor-pointer">
-            <Link href="#Navbar">
+            <a href="#home">
             <Image
               src="/logo.jpg"
               alt="Logo"
@@ -30,8 +30,8 @@ const Navbar = () => {
               height={48}
               className="rounded-full"
             />
-            </Link>
-            <h2 className="font-serif text-md md:text-xl font-bold text-[#081C30]">তাহদীথ শপ</h2>
+            </a>
+            <h2 className="font-serif text-md md:text-xl font-bold text-[#081C30]"><a href="#home">তাহদীথ শপ</a></h2>
           </div>
 
           {/* Cart Button */}

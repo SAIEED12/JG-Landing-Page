@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Leaf, Dot, CircleCheck } from 'lucide-react';
+import { ShieldCheck, CircleCheck } from 'lucide-react';
 import Image from 'next/image';
 
 const Hero = () => {
@@ -10,7 +10,7 @@ const Hero = () => {
   ];
 
   return (
-    <div className="relative overflow-hidden bg-white">
+    <div className="relative overflow-hidden bg-[#F8FAFC]">
       {/* Soft radial accent, navy-tinted */}
       {/* <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-[#8FBCE8]/20 rounded-full  -translate-y-1/3 translate-x-1/4" /> */}
 
@@ -48,7 +48,7 @@ const Hero = () => {
           {/* Price + CTA */}
           <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
             <span className="font-serif font-bold text-2xl text-[#0F3457]">
-              Tk ২,১৭০
+              ৳২,১৭০
             </span>
             <span className="bg-[#0F3457] text-white text-xs font-bold px-3 py-1 rounded-full">
               ৪% ছাড়
@@ -65,7 +65,7 @@ const Hero = () => {
 <div className="relative flex items-center justify-center w-full">
   <div className="absolute w-172 h-120 bg-[#8FBCE8]/25 rounded-full blur-3xl" />
   <Image
-    src="/jg2-removebg-preview_upscaled.png"
+    src="/hero.png"
     width={340}
     height={340}
     priority
