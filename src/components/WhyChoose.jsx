@@ -5,15 +5,15 @@ const WhyChoose = () => {
   const points = [
     {
       num: '০১',
-      text: 'আপনি অস্টিওআর্থ্রাইটিসে আক্রান্ত হয়ে থাকেন।',
+      text: 'যদি আপনি অস্টিওআর্থ্রাইটিসে আক্রান্ত হয়ে থাকেন।',
     },
     {
       num: '০২',
-      text: 'হালকা অস্বস্তি থেকে শুরু হয়ে জয়েন্টের ব্যথা এখন নড়াচড়াতেও কষ্ট দিচ্ছে — জয়েন্ট শক্ত বা ফোলা অনুভব হচ্ছে।',
+      text: 'হালকা অস্বস্তি থেকে শুরু হয়ে জয়েন্টের ব্যথা এখন নড়াচড়াতেও কষ্ট দিচ্ছে অথবা জয়েন্ট শক্ত বা ফোলা অনুভব হচ্ছে।',
     },
     {
       num: '০৩',
-      text: 'সিঁড়ি ওঠা-নামা, বাজার যাওয়া বা নামাজে দাঁড়ানোর সেই আগের সাবলীলতা ফিরিয়ে আনতে চান।',
+      text: 'সিঁড়ি বেয়ে ওঠা-নামা, বাজারে যাওয়া বা নামাজের জন্য দাঁড়ানো — সেই আগের মতো স্বস্তি আবার ফিরে পেতে চান।',
     },
   ];
 
@@ -23,7 +23,7 @@ const WhyChoose = () => {
         {/* Left: image */}
         <div className="order-2 md:order-1">
           <Image
-            src="/knee-pain.png"
+            src="/KNEE_PAIN.png"
             alt="জয়েন্ট ব্যথা"
             className="rounded-2xl w-full object-cover"
             width={500}
@@ -45,8 +45,7 @@ const WhyChoose = () => {
             {points.map((point) => (
               <div
                 key={point.num}
-                className="flex items-start gap-4 bg-[#F1F5F9] border-l-4 border-[#0F3457] rounded-xl px-5 py-4 text-left"
-              >
+                className="flex items-start gap-4 bg-[#F1F5F9] border-l-4 border-[#0F3457] rounded-xl px-5 py-4 text-left font-semibold">
                 <span className="font-serif font-bold text-[#1B4C7E] text-lg shrink-0">
                   {point.num}
                 </span>

@@ -68,10 +68,8 @@ const Hero = () => {
     src="/hero.png"
     width={340}
     height={340}
-    priority
-    quality={100}
     alt="কারকুমা জয়েন্ট গার্ড"
-    className="relative z-10 rounded-2xl w-full max-w-[470px] h-auto"
+    className="relative z-10 rounded-2xl w-full max-w-[500px] h-auto"
   />
 </div>
       </div>
