@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
+import { TbPercentage100 } from 'react-icons/tb';
 
 const Certifications = () => {
   const certs = [
@@ -23,11 +24,11 @@ const Certifications = () => {
     <div className="bg-[#F1F5F9] py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-6 md:px-10 text-center">
         {/* Section head */}
-        <span className="inline-block bg-[#8FBCE8]/20 text-[#0F3457] text-xs font-semibold px-4 py-2 rounded-full mb-5">
-          বিশ্বাসযোগ্যতা যা আমরা তৈরি করি
+        <span className="inline-flex items-center gap-2 bg-[#8FBCE8]/20 text-[#0F3457] text-xs font-semibold px-4 py-2 rounded-full mb-5">
+          <TbPercentage100 /> প্রমাণিত গুণগত মান
         </span>
         <h2 className="font-serif font-bold text-2xl md:text-4xl text-[#0F3457] leading-snug mb-14">
-          বিশ্বমানের সার্টিফিকেশন যা আমরা অর্জন করেছি
+         বিশ্বমানের স্বীকৃতি ও সার্টিফিকেশন
         </h2>
 
         <div className="relative">

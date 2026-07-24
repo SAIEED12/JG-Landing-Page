@@ -51,7 +51,7 @@ const Ratings = () => {
 
         {/* Rating summary */}
         <div className="flex items-center justify-center gap-4 mb-12">
-          <span className="font-serif font-bold text-4xl text-[#0F3457]">৪.৫</span>
+          <span className="font-serif font-bold text-4xl text-[#0F3457]">৫.০</span>
           <div>
             <StarRow count={5} />
             <p className="font-sans text-[#1C2530]/60 text-xs mt-1">৫০টি রিভিউর ভিত্তিতে</p>

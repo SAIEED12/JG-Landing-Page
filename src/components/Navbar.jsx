@@ -2,6 +2,7 @@ import React from "react";
 import { Phone, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Chip } from "@heroui/react";
 
 const Navbar = () => {
   return (
@@ -33,9 +34,9 @@ const Navbar = () => {
             </a>
             <h2 className="font-serif text-md md:text-xl font-bold text-[#081C30]"><a href="#home">তাহদীথ শপ</a></h2>
           </div>
-          <h2 className="hidden md:block text-center font-sans text-xl font-bold text-[#e4a30c]">কারকুমা জয়েন্ট গার্ড</h2>
+          <Chip color="warning" variant="primary">কারকুমা জয়েন্ট গার্ড</Chip>
 
-          {/* Cart Button */}
+          {/* Order Button */}
           <Link href="#cart" className="flex items-center gap-2 bg-[#1D4F91] hover:bg-[#163d70] text-white px-4 py-2 md:px-6 md:py-2 rounded-full transition">
             <ShoppingCart size={16} />
             <span className="font-semibold font-serif text-sm md:text-lg">অর্ডার করুন</span>
