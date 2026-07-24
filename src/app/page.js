@@ -1,3 +1,4 @@
+import Certifications from "@/components/Certifications";
 import Faq from "@/components/Faq";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
@@ -14,6 +15,10 @@ export default function Home() {
     <div >
       <section id="home">
         <Hero />
+      </section>
+     
+      <section id="certifications">
+        <Certifications />
       </section>
       
       <section id="why-choose">
