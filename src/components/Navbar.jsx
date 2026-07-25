@@ -39,7 +39,7 @@ const Navbar = () => {
           </div>
 
           {/* Order Button */}
-          <Link href="#cart" className="flex items-center gap-2 bg-[#1D4F91] hover:bg-[#163d70] text-white px-4 py-2 md:px-6 md:py-2 rounded-full transition">
+          <Link href="#order" className="flex items-center gap-2 bg-[#1D4F91] hover:bg-[#163d70] text-white px-4 py-2 md:px-6 md:py-2 rounded-full transition">
             <ShoppingCart size={16} />
             <span className="font-semibold font-serif text-sm md:text-lg">অর্ডার করুন</span>
           </Link>
