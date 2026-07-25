@@ -1,5 +1,36 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Clock, CalendarCheck, Snowflake } from 'lucide-react';
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const headVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.7 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 180, damping: 16 },
+  },
+};
 
 const Usage = () => {
   const steps = [
@@ -24,23 +55,43 @@ const Usage = () => {
     <div className="bg-[#022749] py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         {/* Section head */}
-        <div className="max-w-2xl mx-auto text-center mb-12">
-          <span className="inline-flex items-center gap-2 bg-white/10 text-[#8FBCE8] text-sm font-semibold px-4 py-2 rounded-full mb-5">
+        <motion.div
+          className="max-w-2xl mx-auto text-center mb-12"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={containerVariants}
+        >
+          <motion.span
+            variants={headVariants}
+            className="inline-flex items-center gap-2 bg-white/10 text-[#8FBCE8] text-sm font-semibold px-4 py-2 rounded-full mb-5"
+          >
             <Clock size={12} />
             সেবনবিধি
-          </span>
-          <h2 className="font-serif font-bold text-2xl md:text-4xl text-white">
+          </motion.span>
+          <motion.h2
+            variants={headVariants}
+            className="font-serif font-bold text-2xl md:text-4xl text-white"
+          >
             সহজ তিনটি নিয়ম মেনে চলুন
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
         {/* Usage cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+        >
           {steps.map((step) => {
             const Icon = step.icon;
             return (
-              <div
+              <motion.div
                 key={step.label}
+                variants={cardVariants}
+                whileHover={{ y: -4 }}
                 className="bg-white/5 border border-white/10 rounded-2xl px-6 py-8 text-center"
               >
                 <div className="w-14 h-14 rounded-full bg-white/10 border-2 border-[#fefeff] flex items-center justify-center mx-auto mb-4">
@@ -52,10 +103,10 @@ const Usage = () => {
                 <p className="font-sans text-white/80 text-sm">
                   {step.desc}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
