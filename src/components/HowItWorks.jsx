@@ -24,8 +24,8 @@ const badgeVariants = {
 
 // Cards alternate direction based on index (even = from left, odd = from right)
 const cardVariants = {
-  hiddenLeft: { opacity: 0, x: -60, rotate: -6 },
-  hiddenRight: { opacity: 0, x: 60, rotate: 6 },
+  hiddenLeft: { opacity: 0, x: -30, rotate: -6 },
+  hiddenRight: { opacity: 0, x: 30, rotate: 6 },
   show: {
     opacity: 1,
     x: 0,
@@ -68,7 +68,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div className="bg-[#F1F5F9] py-16 md:py-24">
+    <div className="bg-[#F1F5F9] py-16 md:py-24 overflow-x-hidden">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         {/* Section head */}
         <div className="max-w-2xl mx-auto text-center mb-12">

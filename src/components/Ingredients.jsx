@@ -113,8 +113,8 @@ const Ingredients = () => {
               whileTap={{ scale: 0.98 }}
               className="bg-[#F1F5F9] rounded-2xl overflow-hidden border border-[#0F3457]/5 hover:shadow-lg hover:shadow-[#0F3457]/10 transition-shadow"
             >
-              <div className="w-full aspect-square overflow-hidden">
-                <motion.div variants={imageVariants}>
+              <div className="w-full aspect-[4/3] overflow-hidden">
+                <motion.div variants={imageVariants} className="w-full h-full">
                   <Image
                     src={item.image}
                     alt={item.title}
@@ -125,8 +125,8 @@ const Ingredients = () => {
                 </motion.div>
               </div>
 
-              <div className="p-5">
-                <h3 className="font-serif font-bold text-[#0F3457] text-base md:text-lg mb-2">
+              <div className="px-5 pt-8 pb-10">
+                <h3 className="font-serif font-bold text-[#0F3457] text-base md:text-lg mb-1.5">
                   {item.title}
                 </h3>
 

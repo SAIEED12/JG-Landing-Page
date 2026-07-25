@@ -27,39 +27,28 @@ const Footer = () => {
   return (
     <footer className="bg-[#081C30] pt-16 pb-24 md:pb-16">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
-        <div className="grid md:grid-cols-4 gap-10 mb-12">
+        <div className="grid md:grid-cols-4 gap-10 mb-12 text-center md:text-left">
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 flex flex-col items-center md:items-start">
             <a href="#home" className="flex items-center gap-2 text-white font-serif font-bold text-xl mb-4">
-                <Image
+              <Image
                 src={"/logo.jpg"}
                 width={30}
                 height={30}
-                alt='Footer Logo'
-                className='rounded-full'
-                />
-                তাহদীথ শপ
+                alt="Footer Logo"
+                className="rounded-full"
+              />
+              তাহদীথ শপ
             </a>
             <p className="font-sans text-white/60 text-sm max-w-xs">
               প্রাণবন্ত জীবনকে উপভোগ করুন সুস্থতার সাথে — প্রকৃতি ও বিজ্ঞানের সমন্বয়ে তৈরি ফাংশনাল ফুড।
             </p>
-            <div className="flex items-center gap-3 mt-5">
-              {socials.map(({ Icon, href }, i) => (
-                <a
-                  key={i}
-                  href={href}
-                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:bg-[#8FBCE8] hover:text-[#0F3457] transition-colors"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Quick links */}
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <h3 className="font-serif font-bold text-white text-sm mb-4">কুইক লিংক</h3>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-3 items-center md:items-start">
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="font-sans text-white/60 text-sm hover:text-[#8FBCE8] transition-colors">
@@ -71,9 +60,9 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <h3 className="font-serif font-bold text-white text-sm mb-4">যোগাযোগ</h3>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-3 items-center md:items-start">
               <a href="tel:+8801673009016" className="flex items-center gap-2 font-sans text-white/60 text-sm hover:text-[#8FBCE8] transition-colors">
                 <Phone size={14} className="text-[#8FBCE8] shrink-0" />
                 +8801673-009016
@@ -87,6 +76,19 @@ const Footer = () => {
                 ঢাকা, বাংলাদেশ
               </a>
             </ul>
+
+            {/* Social icons */}
+            <div className="flex items-center gap-3 mt-4">
+              {socials.map(({ Icon, href }, i) => (
+                  <a
+                  key={i}
+                  href={href}
+                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:bg-[#8FBCE8] hover:text-[#0F3457] transition-colors"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
