@@ -1,4 +1,7 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Star } from 'lucide-react';
 
 const StarRow = ({ count }) => (
@@ -12,6 +15,25 @@ const StarRow = ({ count }) => (
     ))}
   </div>
 );
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+};
 
 const Ratings = () => {
   const reviews = [
@@ -35,34 +57,96 @@ const Ratings = () => {
     },
   ];
 
+  const scoreRef = useRef(null);
+  const inView = useInView(scoreRef, { once: true, amount: 0.5 });
+  const [displayScore, setDisplayScore] = useState('০.০');
+
+  const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  const toBengali = (num) =>
+    num
+      .toFixed(1)
+      .split('')
+      .map((ch) => (ch === '.' ? '.' : bengaliDigits[parseInt(ch, 10)]))
+      .join('');
+
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const end = 5.0;
+    const duration = 900;
+    const stepTime = 30;
+    const steps = duration / stepTime;
+    const increment = end / steps;
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setDisplayScore(toBengali(end));
+        clearInterval(timer);
+      } else {
+        setDisplayScore(toBengali(start));
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [inView]);
+
   return (
     <div className="bg-white py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         {/* Section head */}
-        <div className="max-w-2xl mx-auto text-center mb-8">
-          <span className="inline-flex items-center gap-2 bg-[#0F3457]/5 text-[#0F3457] text-xs font-semibold px-4 py-2 rounded-full mb-5">
+        <motion.div
+          className="max-w-2xl mx-auto text-center mb-8"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={containerVariants}
+        >
+          <motion.span
+            variants={itemVariants}
+            className="inline-flex items-center gap-2 bg-[#0F3457]/5 text-[#0F3457] text-xs font-semibold px-4 py-2 rounded-full mb-5"
+          >
             <Star size={14} />
             কাস্টমার রিভিউ
-          </span>
-          <h2 className="font-serif font-bold text-2xl md:text-4xl text-[#0F3457] leading-snug">
+          </motion.span>
+          <motion.h2
+            variants={itemVariants}
+            className="font-serif font-bold text-2xl md:text-4xl text-[#0F3457] leading-snug"
+          >
             হাজারো মানুষ উপকৃত হয়েছেন
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
         {/* Rating summary */}
-        <div className="flex items-center justify-center gap-4 mb-12">
-          <span className="font-serif font-bold text-4xl text-[#0F3457]">৫.০</span>
+        <motion.div
+          ref={scoreRef}
+          className="flex items-center justify-center gap-4 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          <span className="font-serif font-bold text-4xl text-[#0F3457] tabular-nums">
+            {displayScore}
+          </span>
           <div>
             <StarRow count={5} />
             <p className="font-sans text-[#1C2530]/60 text-xs mt-1">৫০টি রিভিউর ভিত্তিতে</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Review cards */}
-        <div className="grid md:grid-cols-3 gap-5">
+        <motion.div
+          className="grid md:grid-cols-3 gap-5"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+        >
           {reviews.map((review) => (
-            <div
+            <motion.div
               key={review.name}
+              variants={itemVariants}
               className="bg-[#F1F5F9] rounded-2xl p-6 border border-[#0F3457]/5"
             >
               <div className="flex items-center gap-3 mb-3">
@@ -75,9 +159,9 @@ const Ratings = () => {
                 </div>
               </div>
               <p className="font-sans text-[#1C2530] text-sm">{review.text}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
