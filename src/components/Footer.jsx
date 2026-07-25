@@ -12,9 +12,9 @@ const Footer = () => {
   ];
 
   const policies = [
-    { label: 'প্রাইভেসি পলিসি', href: '#' },
-    { label: 'রিটার্ন ও রিফান্ড', href: '#' },
-    { label: 'শর্তাবলী', href: '#' },
+    { label: 'প্রাইভেসি পলিসি', href: '/privacy-policy' },
+    { label: 'রিটার্ন ও রিফান্ড', href: '/return-refund' },
+    { label: 'শর্তাবলী', href: '/terms-condition' },
   ];
 
   const socials = [
