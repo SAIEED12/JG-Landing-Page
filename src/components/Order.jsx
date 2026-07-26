@@ -1,15 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
-import { Truck, CheckCircle2 } from "lucide-react";
+import { Truck, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-
-import "swiper/css";
-import "swiper/css/navigation";
 import Image from "next/image";
-import { Button } from "@heroui/react";
 import { toast } from "@heroui/react";
 const productImages = [
   "/KJG-01.webp",
@@ -48,6 +42,7 @@ const WHATSAPP_NUMBER = "8801673009016";
 
 const Order = () => {
   const [selectedPack, setSelectedPack] = useState(packOptions[0]);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -127,22 +122,63 @@ const Order = () => {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left: Image slider */}
           <div className="relative">
-            <div className="w-full aspect-square flex items-center justify-center">
-              <Image
-                src={productImages[0]}
-                alt={`কারকুমা জয়েন্ট গার্ড`}
-                width={500}
-                height={500}
-                className="w-full h-full object-cover"
-              />
+            <div className="w-full aspect-square overflow-hidden rounded-2xl bg-[#e2edf7]">
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {productImages.map((src, i) => (
+                  <div key={i} className="w-full shrink-0">
+                    <div className="w-full aspect-square flex items-center justify-center">
+                      <Image
+                        src={src}
+                        alt={`কারকুমা জয়েন্ট গার্ড`}
+                        width={500}
+                        height={500}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Dots */}
+            <div className="flex justify-center gap-2 mt-4">
+              {productImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                    i === currentSlide
+                      ? "bg-[#0F3457] w-6"
+                      : "bg-[#0F3457]/30"
+                  }`}
+                />
+              ))}
             </div>
 
             {/* Nav buttons */}
-            <button className="order-swiper-prev absolute top-1/2 -translate-y-1/2 left-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#0F3457] shadow-md">
-              ‹
+            <button
+              onClick={() =>
+                setCurrentSlide(
+                  (prev) =>
+                    (prev - 1 + productImages.length) % productImages.length
+                )
+              }
+              className="absolute top-1/2 -translate-y-1/2 left-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#0F3457] shadow-md cursor-pointer hover:bg-gray-100"
+            >
+              <ChevronLeft size={18} />
             </button>
-            <button className="order-swiper-next absolute top-1/2 -translate-y-1/2 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#0F3457] shadow-md">
-              ›
+            <button
+              onClick={() =>
+                setCurrentSlide(
+                  (prev) => (prev + 1) % productImages.length
+                )
+              }
+              className="absolute top-1/2 -translate-y-1/2 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#0F3457] shadow-md cursor-pointer hover:bg-gray-100"
+            >
+              <ChevronRight size={18} />
             </button>
           </div>
 
@@ -170,8 +206,8 @@ const Order = () => {
                         type="button"
                         key={option.id}
                         onClick={() => setSelectedPack(option)}
-                        className={`relative flex flex-col items-center gap-1 rounded-xl border-2 px-3 py-4 text-center transition-colors ${
-                          isSelected
+className={`relative flex flex-col items-center gap-1 rounded-xl border-2 px-3 py-4 text-center ${
+                           isSelected
                             ? "border-[#0F3457] bg-white"
                             : "border-transparent bg-white/60 hover:bg-white"
                         }`}
@@ -300,7 +336,7 @@ const Order = () => {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#0F3457] hover:bg-[#1B4C7E] transition-colors text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#0F3457]/20 cursor-pointer"
+                className="w-full bg-[#0F3457] hover:bg-[#1B4C7E] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#0F3457]/20 cursor-pointer"
               >
                 অর্ডার করুন
               </button>
@@ -309,7 +345,7 @@ const Order = () => {
               <button
                 type="button"
                 onClick={handleWhatsappOrder}
-                className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] transition-colors text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
               >
                 <FaWhatsapp size={20} />
                 হোয়াটসঅ্যাপে অর্ডার করুন

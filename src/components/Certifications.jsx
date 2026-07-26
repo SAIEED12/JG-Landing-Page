@@ -1,43 +1,14 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
 import { TbPercentage100 } from 'react-icons/tb';
-
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
-  },
-};
-
-const sliderVariants = {
-  hidden: { opacity: 0, scale: 0.96 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.7, ease: 'easeOut', delay: 0.2 },
-  },
-};
 
 const Certifications = () => {
   const certs = [
@@ -52,45 +23,23 @@ const Certifications = () => {
     <div className="bg-[#F1F5F9] py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-6 md:px-10 text-center">
         {/* Section head */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <motion.span
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 bg-[#8FBCE8]/20 text-[#0F3457] text-xs font-semibold px-4 py-2 rounded-full mb-5"
-          >
+        <div>
+          <span className="inline-flex items-center gap-2 bg-[#8FBCE8]/20 text-[#0F3457] text-xs font-semibold px-4 py-2 rounded-full mb-5">
             <TbPercentage100 /> প্রমাণিত গুণগত মান
-          </motion.span>
-          <motion.h2
-            variants={itemVariants}
-            className="font-serif font-bold text-2xl md:text-4xl text-[#0F3457] leading-snug mb-14"
-          >
+          </span>
+          <h2 className="font-serif font-bold text-2xl md:text-4xl text-[#0F3457] leading-snug mb-14">
             বিশ্বমানের স্বীকৃতি ও সার্টিফিকেশন
-          </motion.h2>
-        </motion.div>
+          </h2>
+        </div>
 
         {/* Slider */}
-        <motion.div
-          className="relative"
-          variants={sliderVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <div className="relative">
           <Swiper
-            modules={[Autoplay, Navigation]}
+            modules={[Navigation, Autoplay]}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
             slidesPerView={1}
             spaceBetween={24}
             loop={true}
-            speed={800}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
             navigation={{
               nextEl: '.cert-swiper-next',
               prevEl: '.cert-swiper-prev',
@@ -126,7 +75,7 @@ const Certifications = () => {
           <button className="cert-swiper-next absolute top-1/3 -translate-y-1/2 -right-2 md:-right-5 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#0F3457] shadow-md">
             <ChevronRight size={18} />
           </button>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

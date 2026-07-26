@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import {
   BadgeCheck,
   ShieldCheck,
@@ -11,34 +10,6 @@ import {
   Factory,
   CircleCheck,
 } from 'lucide-react';
-
-const headVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
-  },
-};
-
-const gridVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, rotateY: -90 },
-  show: {
-    opacity: 1,
-    rotateY: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
-  },
-};
 
 const Trust = () => {
   const points = [
@@ -79,44 +50,28 @@ const Trust = () => {
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         {/* Section head */}
         <div className="max-w-2xl mx-auto text-center mb-12">
-          <motion.span
-            variants={headVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.5 }}
+          <span
             className="inline-flex items-center gap-2 bg-[#0F3457]/5 text-[#0F3457] text-xs font-semibold px-4 py-2 rounded-full mb-5"
           >
             <CircleCheck size={14} />
             বিশ্বাসযোগ্যতা ও মানের নিশ্চয়তা
-          </motion.span>
-          <motion.h2
-            variants={headVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.5 }}
+          </span>
+          <h2
             className="font-serif font-bold text-2xl md:text-4xl text-[#0F3457] leading-snug"
           >
             কারকুমা জয়েন্ট গার্ড কেন নিরাপদ ও কার্যকর?
-          </motion.h2>
+          </h2>
         </div>
 
         {/* Trust cards */}
-        <motion.div
+        <div
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5"
-          style={{ perspective: 1000 }}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={gridVariants}
         >
           {points.map((point) => {
             const Icon = point.icon;
             return (
-              <motion.div
+              <div
                 key={point.title}
-                variants={cardVariants}
-                whileHover={{ scale: 1.03 }}
-                style={{ transformStyle: 'preserve-3d' }}
                 className="flex items-start gap-4 bg-[#F1F5F9] rounded-2xl p-6"
               >
                 <div className="w-10 h-10 rounded-lg bg-[#0F3457] flex items-center justify-center shrink-0">
@@ -130,10 +85,10 @@ const Trust = () => {
                     {point.desc}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

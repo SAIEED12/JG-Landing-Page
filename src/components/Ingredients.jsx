@@ -3,47 +3,6 @@
 import { Sprout } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { motion } from "framer-motion";
-
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
-
-const imageVariants = {
-  hidden: {
-    scale: 1.1,
-    opacity: 0,
-  },
-  show: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
-};
 
 const Ingredients = () => {
   const ingredients = [
@@ -74,55 +33,38 @@ const Ingredients = () => {
       <div className="max-w-6xl mx-auto px-6 md:px-10">
 
         {/* Section Head */}
-        <motion.div
-          className="max-w-2xl mx-auto text-center mb-12"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <motion.span
-            variants={itemVariants}
+        <div className="max-w-2xl mx-auto text-center mb-12">
+          <span
             className="inline-flex items-center gap-2 bg-[#0F3457]/5 text-[#0F3457] text-md font-semibold px-4 py-2 rounded-full mb-5"
           >
             <Sprout size={14} />
             মূল উপাদানসমূহ
-          </motion.span>
+          </span>
 
-          <motion.h2
-            variants={itemVariants}
+          <h2
             className="font-serif font-bold text-2xl md:text-4xl text-[#0F3457] leading-snug"
           >
             আপনার পরিচিত প্রাকৃতিক উপাদানে তৈরি, শরীরের সাথে মানানসই
-          </motion.h2>
-        </motion.div>
+          </h2>
+        </div>
 
         {/* Cards */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-5"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {ingredients.map((item) => (
-            <motion.div
+            <div
               key={item.title}
-              variants={itemVariants}
-              whileHover={{ y: -8 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-[#F1F5F9] rounded-2xl overflow-hidden border border-[#0F3457]/5 hover:shadow-lg hover:shadow-[#0F3457]/10 transition-shadow"
+              className="bg-[#F1F5F9] rounded-2xl overflow-hidden border border-[#0F3457]/5"
             >
               <div className="w-full aspect-[4/3] overflow-hidden">
-                <motion.div variants={imageVariants} className="w-full h-full">
+                <div className="w-full h-full">
                   <Image
                     src={item.image}
                     alt={item.title}
                     width={300}
                     height={300}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    className="w-full h-full object-cover"
                   />
-                </motion.div>
+                </div>
               </div>
 
               <div className="px-5 pt-8 pb-10">
@@ -134,9 +76,9 @@ const Ingredients = () => {
                   {item.desc}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
       </div>
     </section>
