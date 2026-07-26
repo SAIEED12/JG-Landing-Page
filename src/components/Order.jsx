@@ -60,7 +60,9 @@ const Order = () => {
 
   const totalPrice = selectedPack.price + 60;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
+    const apiURL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
+
     e.preventDefault();
     const orderDetails = {
       ...formData,
@@ -69,7 +71,18 @@ const Order = () => {
       payment: "ক্যাশ অন ডেলিভারি",
     };
     console.log("Order submitted:", orderDetails);
-    // TODO: connect to your order API / Google Sheet / backend here
+
+    const res = await fetch(`${apiURL}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderDetails),
+    }); 
+
+    const data = await res.json();
+    console.log(data);
+
     toast("অর্ডার সফলভাবে সম্পন্ন হয়েছে!", {
       description: "আমরা শীঘ্রই কল করে অর্ডার কনফার্ম করব।",
       variant: "success",
