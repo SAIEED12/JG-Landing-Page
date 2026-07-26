@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { Truck, CheckCircle2 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -43,6 +44,8 @@ const toBengaliNumber = (num) =>
     .map((ch) => (/[0-9]/.test(ch) ? bengaliDigits[parseInt(ch, 10)] : ch))
     .join("");
 
+const WHATSAPP_NUMBER = "8801673009016";
+
 const Order = () => {
   const [selectedPack, setSelectedPack] = useState(packOptions[0]);
   const [formData, setFormData] = useState({
@@ -55,12 +58,14 @@ const Order = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const totalPrice = selectedPack.price + 60;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const orderDetails = {
       ...formData,
       pack: selectedPack.label,
-      price: selectedPack.price,
+      price: totalPrice,
       payment: "ক্যাশ অন ডেলিভারি",
     };
     console.log("Order submitted:", orderDetails);
@@ -70,6 +75,21 @@ const Order = () => {
       variant: "success",
       timeout: 5000,
     });
+  };
+
+  const handleWhatsappOrder = () => {
+    const message =
+      `আমি কারকুমা জয়েন্ট গার্ড অর্ডার করতে চাই।\n\n` +
+      `নাম: ${formData.name || "-"}\n` +
+      `ফোন: ${formData.phone || "-"}\n` +
+      `ঠিকানা: ${formData.address || "-"}\n` +
+      `প্যাক: ${selectedPack.label}\n` +
+      `প্যাকের মূল্য: ৳${selectedPack.price}\n` +
+      `ডেলিভারি চার্জ: ৳60\n` +
+      `সর্বমোট: ৳${totalPrice}\n`;
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -200,7 +220,7 @@ const Order = () => {
 
               {/* Payment method */}
               <div>
-                <label className="block font-sans font-semibold text-[#0F3457] text-sm mb-2"></label>
+                <label className="block font-sans font-semibold text-[#0F3457] text-sm mb-2">পেমেন্ট পদ্ধতি  </label>
                 <label className="flex items-center gap-3 rounded-lg border border-[#0F3457]/15 bg-white px-4 py-3 cursor-pointer">
                   <input
                     type="radio"
@@ -241,7 +261,7 @@ const Order = () => {
                     সর্বমোট
                   </span>
                   <span className="font-serif font-bold text-2xl text-[#0F3457]">
-                    ৳{toBengaliNumber(selectedPack.price + 60)}
+                    ৳{toBengaliNumber(totalPrice)}
                   </span>
                 </div>
               </div>
@@ -252,6 +272,16 @@ const Order = () => {
                 className="w-full bg-[#0F3457] hover:bg-[#1B4C7E] transition-colors text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#0F3457]/20 cursor-pointer"
               >
                 অর্ডার করুন
+              </button>
+
+              {/* WhatsApp order */}
+              <button
+                type="button"
+                onClick={handleWhatsappOrder}
+                className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] transition-colors text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
+              >
+                <FaWhatsapp size={20} />
+                হোয়াটসঅ্যাপে অর্ডার করুন
               </button>
             </form>
           </div>
