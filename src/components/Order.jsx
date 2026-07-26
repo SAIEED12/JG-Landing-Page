@@ -31,7 +31,7 @@ const packOptions = [
     id: 3,
     packs: 3,
     label: "৩ প্যাক",
-    price: 6300,
+    price: 6200,
     badge: "সর্বোচ্চ সাশ্রয়",
   },
 ];
@@ -58,12 +58,11 @@ const Order = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const totalPrice = selectedPack.price + 60;
-
-  const handleSubmit = async(e) => {
+  const totalPrice = selectedPack.price;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const apiURL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
 
-    e.preventDefault();
     const orderDetails = {
       ...formData,
       pack: selectedPack.label,
@@ -72,24 +71,41 @@ const Order = () => {
     };
     console.log("Order submitted:", orderDetails);
 
-    const res = await fetch(`${apiURL}/orders`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(orderDetails),
-    }); 
+    try {
+      const res = await fetch(`${apiURL}/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderDetails),
+      });
 
-    const data = await res.json();
-    console.log(data);
+      if (!res.ok) {
+        throw new Error(`Server responded with ${res.status}`);
+      }
 
-    toast("অর্ডার সফলভাবে সম্পন্ন হয়েছে!", {
-      description: "আমরা শীঘ্রই কল করে অর্ডার কনফার্ম করব।",
-      variant: "success",
-      timeout: 5000,
-    });
+      const data = await res.json();
+      console.log(data);
+
+      toast("অর্ডার সফলভাবে সম্পন্ন হয়েছে!", {
+        description: "আমরা শীঘ্রই কল করে অর্ডার কনফার্ম করব।",
+        variant: "success",
+        timeout: 5000,
+      });
+
+      // Reset Form
+      setFormData({ name: "", phone: "", address: "" });
+      setSelectedPack(packOptions[0]);
+
+    } catch (err) {
+      console.error("Order submission failed:", err);
+      toast("অর্ডার সম্পন্ন হয়নি", {
+        description: "একটি সমস্যা হয়েছে, আবার চেষ্টা করুন।",
+        variant: "danger",
+        timeout: 5000,
+      });
+    }
   };
-
   const handleWhatsappOrder = () => {
     const message =
       `আমি কারকুমা জয়েন্ট গার্ড অর্ডার করতে চাই।\n\n` +
@@ -98,7 +114,7 @@ const Order = () => {
       `ঠিকানা: ${formData.address || "-"}\n` +
       `প্যাক: ${selectedPack.label}\n` +
       `প্যাকের মূল্য: ৳${selectedPack.price}\n` +
-      `ডেলিভারি চার্জ: ৳60\n` +
+      `ডেলিভারি চার্জ: ফ্রি\n` +
       `সর্বমোট: ৳${totalPrice}\n`;
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -136,7 +152,7 @@ const Order = () => {
               এখনই অর্ডার করুন
             </h2>
             <p className="font-sans text-[#1C2530]/70 text-sm mb-6">
-              নিচের তথ্য দিয়ে অর্ডার সম্পন্ন করুন — ক্যাশ অন ডেলিভারিতে পেমেন্ট
+              নিচে তথ্য দিয়ে অর্ডার সম্পন্ন করুন — ক্যাশ অন ডেলিভারিতে পেমেন্ট
               করুন।
             </p>
 
@@ -233,7 +249,9 @@ const Order = () => {
 
               {/* Payment method */}
               <div>
-                <label className="block font-sans font-semibold text-[#0F3457] text-sm mb-2">পেমেন্ট পদ্ধতি  </label>
+                <label className="block font-sans font-semibold text-[#0F3457] text-sm mb-2">
+                  পেমেন্ট পদ্ধতি{" "}
+                </label>
                 <label className="flex items-center gap-3 rounded-lg border border-[#0F3457]/15 bg-white px-4 py-3 cursor-pointer">
                   <input
                     type="radio"
@@ -265,7 +283,7 @@ const Order = () => {
                     ডেলিভারি চার্জ
                   </span>
                   <span className="font-sans text-sm font-semibold text-[#1C2530]">
-                    ৳{toBengaliNumber(60)}
+                    ফ্রি
                   </span>
                 </div>
 
