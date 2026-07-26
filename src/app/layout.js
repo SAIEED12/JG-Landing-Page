@@ -2,6 +2,7 @@ import { Noto_Serif_Bengali, Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toast } from "@heroui/react";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali", "latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="bn" className={`${notoSerifBengali.variable} ${notoSansBengali.variable}`}>
       <body className="font-sans min-h-full flex flex-col">
+        <Toast.Provider />
         <Navbar />
         {children}
         <Footer/>

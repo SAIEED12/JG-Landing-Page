@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { Button } from "@heroui/react";
-
+import { toast } from "@heroui/react";
 const productImages = [
   "/KJG-01.webp",
   "/KJG-02.webp",
@@ -65,7 +65,11 @@ const Order = () => {
     };
     console.log("Order submitted:", orderDetails);
     // TODO: connect to your order API / Google Sheet / backend here
-    alert("আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে!");
+    toast("অর্ডার সফলভাবে সম্পন্ন হয়েছে!", {
+      description: "আমরা শীঘ্রই কল করে অর্ডার কনফার্ম করব।",
+      variant: "success",
+      timeout: 5000,
+    });
   };
 
   return (
