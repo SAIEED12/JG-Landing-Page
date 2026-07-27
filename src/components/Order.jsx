@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import { Truck, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
-import { FaPhone, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
+import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
-import { Button, toast } from "@heroui/react";
-import { FaPhoneFlip } from "react-icons/fa6";
+import { toast } from "@heroui/react";
 const productImages = [
   "/KJG-01.webp",
   "/KJG-02.webp",
@@ -57,15 +56,23 @@ const Order = () => {
   const totalPrice = selectedPack.price;
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiURL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
+    const apiURL =
+      process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
 
     const orderDetails = {
-      ...formData,
+      name: formData.name,
+      phone: formData.phone,
+      address: formData.address,
+
       pack: selectedPack.label,
-      price: totalPrice,
-      payment: "ক্যাশ অন ডেলিভারি",
+      quantity: selectedPack.packs,
+      totalPrice: totalPrice,
+
+      paymentMethod: "Cash on Delivery",
+      orderStatus: "Pending",
+
+      createdAt: new Date().toISOString(),
     };
-    console.log("Order submitted:", orderDetails);
 
     try {
       const res = await fetch(`${apiURL}/orders`, {
@@ -92,7 +99,6 @@ const Order = () => {
       // Reset Form
       setFormData({ name: "", phone: "", address: "" });
       setSelectedPack(packOptions[0]);
-
     } catch (err) {
       console.error("Order submission failed:", err);
       toast("অর্ডার সম্পন্ন হয়নি", {
@@ -151,9 +157,7 @@ const Order = () => {
                   key={i}
                   onClick={() => setCurrentSlide(i)}
                   className={`w-2.5 h-2.5 rounded-full transition-all ${
-                    i === currentSlide
-                      ? "bg-[#0F3457] w-6"
-                      : "bg-[#0F3457]/30"
+                    i === currentSlide ? "bg-[#0F3457] w-6" : "bg-[#0F3457]/30"
                   }`}
                 />
               ))}
@@ -164,7 +168,7 @@ const Order = () => {
               onClick={() =>
                 setCurrentSlide(
                   (prev) =>
-                    (prev - 1 + productImages.length) % productImages.length
+                    (prev - 1 + productImages.length) % productImages.length,
                 )
               }
               className="absolute top-1/2 -translate-y-1/2 left-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#0F3457] shadow-md cursor-pointer hover:bg-gray-100"
@@ -173,9 +177,7 @@ const Order = () => {
             </button>
             <button
               onClick={() =>
-                setCurrentSlide(
-                  (prev) => (prev + 1) % productImages.length
-                )
+                setCurrentSlide((prev) => (prev + 1) % productImages.length)
               }
               className="absolute top-1/2 -translate-y-1/2 right-3 z-10 w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#0F3457] shadow-md cursor-pointer hover:bg-gray-100"
             >
@@ -207,8 +209,8 @@ const Order = () => {
                         type="button"
                         key={option.id}
                         onClick={() => setSelectedPack(option)}
-className={`relative flex flex-col items-center gap-1 rounded-xl border-2 px-3 py-4 text-center ${
-                           isSelected
+                        className={`relative flex flex-col items-center gap-1 rounded-xl border-2 px-3 py-4 text-center ${
+                          isSelected
                             ? "border-[#0F3457] bg-white"
                             : "border-transparent bg-white/60 hover:bg-white"
                         }`}
@@ -344,20 +346,22 @@ className={`relative flex flex-col items-center gap-1 rounded-xl border-2 px-3 p
 
               {/* WhatsApp order */}
               <div className="flex items-center justify-center gap-2 mt-3">
+                <button
+                  type="button"
+                  onClick={handleWhatsappOrder}
+                  className="w-full flex items-center justify-center gap-1 bg-[#1ac157] hover:bg-[#077a30] text-white font-sans font-semibold text-md py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
+                >
+                  <FaWhatsapp size={20} />
+                  হোয়াটসঅ্যাপে অর্ডার করুন
+                </button>
 
-              <button 
-                type="button"
-                onClick={handleWhatsappOrder}
-                className="w-full flex items-center justify-center gap-1 bg-[#1ac157] hover:bg-[#077a30] text-white font-sans font-semibold text-md py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
-              >
-                <FaWhatsapp size={20} />
-                হোয়াটসঅ্যাপে অর্ডার করুন
-              </button>
-
-              <a href="tel:+8801673009016" className="w-full flex items-center justify-center gap-2 bg-[#128C7E] hover:bg-[#075E54] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer">
-                <FaPhoneAlt size={16} />
-                Call Now
-              </a>
+                <a
+                  href="tel:+8801673009016"
+                  className="w-full flex items-center justify-center gap-2 bg-[#128C7E] hover:bg-[#075E54] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
+                >
+                  <FaPhoneAlt size={16} />
+                  Call Now
+                </a>
               </div>
             </form>
           </div>
