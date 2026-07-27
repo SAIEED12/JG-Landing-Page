@@ -5,6 +5,7 @@ import { Truck, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import { toast } from "@heroui/react";
+import { useRouter } from 'next/navigation';
 const productImages = [
   "/KJG-01.webp",
   "/KJG-02.webp",
@@ -48,6 +49,7 @@ const Order = () => {
     phone: "",
     address: "",
   });
+  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -95,6 +97,7 @@ const Order = () => {
         variant: "success",
         timeout: 5000,
       });
+      router.push("/order-success");
 
       // Reset Form
       setFormData({ name: "", phone: "", address: "" });
