@@ -1,7 +1,10 @@
+'use client'
+
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
   const quickLinks = [
@@ -23,6 +26,11 @@ const Footer = () => {
     // { Icon: FaInstagram, href: '#' },
     // { Icon: FaYoutube, href: '#' },
   ];
+
+    const pathname = usePathname()
+    if(pathname.includes('dashboard')){
+      return null
+    }
 
   return (
     <footer className="bg-[#081C30] pt-16 pb-24 md:pb-16">

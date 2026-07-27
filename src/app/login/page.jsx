@@ -26,7 +26,7 @@ const LoginPage = () => {
       return;
     }
 
-    router.push('/admin/dashboard');
+    router.push('/dashboard/admin');
     router.refresh();
   };
 

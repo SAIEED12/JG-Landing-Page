@@ -1,10 +1,15 @@
+'use client'
 import React from "react";
 import { Phone, ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { Chip } from "@heroui/react";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const pathname = usePathname()
+  if(pathname.includes('dashboard')){
+    return null
+  }
   return (
     <>
       {/* Top Bar */}
