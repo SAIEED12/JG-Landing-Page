@@ -343,7 +343,7 @@ const Order = () => {
                 {/* Order Button */}
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 rounded-full bg-[#1B4C7E] py-4 text-base font-semibold text-white shadow-lg shadow-[#0F3457]/20 transition hover:bg-[#0F3457]"
+                  className="w-full flex items-center justify-center cursor-pointer gap-2 rounded-full bg-[#1B4C7E] py-4 text-base font-semibold text-white shadow-lg shadow-[#0F3457]/20 transition hover:bg-[#0F3457]"
                 >
                   অর্ডার করুন
                 </button>

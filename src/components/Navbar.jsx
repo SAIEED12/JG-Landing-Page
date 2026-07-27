@@ -10,6 +10,9 @@ const Navbar = () => {
   if(pathname.includes('dashboard')){
     return null
   }
+  if(pathname.includes('order-success')){
+    return null
+  }
   return (
     <>
       {/* Top Bar */}

@@ -82,11 +82,11 @@ const Orders = () => {
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
         <div>
-          <h1 className="text-3xl font-bold text-slate-800">
-            Orders
+          <h1 className="text-3xl font-bold text-slate-800 md:mt-10">
+            All Orders
           </h1>
 
-          <p className="text-slate-500 mt-1">
+          <p className="text-slate-500 mt-1 font-semibold">
             Total Orders: {filteredOrders.length}
           </p>
         </div>

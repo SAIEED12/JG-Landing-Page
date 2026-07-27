@@ -31,6 +31,9 @@ const Footer = () => {
     if(pathname.includes('dashboard')){
       return null
     }
+    if(pathname.includes('order-success')){
+      return null
+    }
 
   return (
     <footer className="bg-[#081C30] pt-16 pb-24 md:pb-16">
