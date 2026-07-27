@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { Truck, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaPhone, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
-import { toast } from "@heroui/react";
+import { Button, toast } from "@heroui/react";
+import { FaPhoneFlip } from "react-icons/fa6";
 const productImages = [
   "/KJG-01.webp",
   "/KJG-02.webp",
@@ -336,20 +337,28 @@ className={`relative flex flex-col items-center gap-1 rounded-xl border-2 px-3 p
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#0F3457] hover:bg-[#1B4C7E] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#0F3457]/20 cursor-pointer"
+                className="w-full bg-[#1B4C7E] hover:bg-[#0F3457] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#0F3457]/20 cursor-pointer"
               >
                 অর্ডার করুন
               </button>
 
               {/* WhatsApp order */}
-              <button
+              <div className="flex items-center justify-center gap-2 mt-3">
+
+              <button 
                 type="button"
                 onClick={handleWhatsappOrder}
-                className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
+                className="w-full flex items-center justify-center gap-1 bg-[#1ac157] hover:bg-[#077a30] text-white font-sans font-semibold text-md py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
               >
                 <FaWhatsapp size={20} />
                 হোয়াটসঅ্যাপে অর্ডার করুন
               </button>
+
+              <a href="tel:+8801673009016" className="w-full flex items-center justify-center gap-2 bg-[#128C7E] hover:bg-[#075E54] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer">
+                <FaPhoneAlt size={16} />
+                Call Now
+              </a>
+              </div>
             </form>
           </div>
         </div>
