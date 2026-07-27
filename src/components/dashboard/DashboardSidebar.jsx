@@ -1,76 +1,89 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
-import {
-  LayoutDashboard,
-  ShoppingBag,
-  Package,
-  Settings,
-  LogOut,
-  Menu,
-  X,
-} from "lucide-react";
+import { Menu, X } from "lucide-react";
 import SidebarContent from "./SidebarContent";
 
-const navItems = [
-  { label: "Overview", href: "/admin/dashboard", icon: LayoutDashboard },
-  { label: "Orders", href: "/admin/dashboard/orders", icon: ShoppingBag },
-  { label: "Products", href: "/admin/dashboard/products", icon: Package },
-  { label: "Settings", href: "/admin/dashboard/settings", icon: Settings },
-];
-
-const DashboardSidebar = ({ adminName }) => {
-  const pathname = usePathname();
+const DashboardSidebar = () => {
   const router = useRouter();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleLogout = async () => {
-    await authClient.signOut();
-    router.push("/login");
+    try {
+      await authClient.signOut();
+      router.push("/login");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <>
-      {/* Mobile top bar with hamburger trigger */}
-      <div className="md:hidden flex items-center justify-between bg-[#0F3457] text-white px-4 py-3 sticky top-0 z-40">
-        <span className="font-serif font-bold">Admin Panel</span>
-        <button onClick={() => setDrawerOpen(true)} aria-label="Open menu">
+      {/* Mobile Header */}
+      <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-slate-700 bg-[#0F3457] px-4 text-white md:hidden">
+        <div className="flex items-center gap-3">
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="h-10 w-10 rounded-full object-cover"
+          />
+
+          <div>
+            <h1 className="text-base font-bold leading-none">
+              Karkuma
+            </h1>
+
+            <p className="text-xs text-white/70">
+              Admin Dashboard
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setDrawerOpen(true)}
+          className="rounded-lg p-2 transition hover:bg-white/10"
+        >
           <Menu size={24} />
         </button>
-      </div>
+      </header>
 
-      {/* Desktop sidebar (always visible) */}
-      <aside className="hidden md:flex w-64 bg-[#0F3457] text-white flex-col p-6 shrink-0 min-h-screen">
+      {/* Desktop Sidebar */}
+      <aside className="hidden w-72 shrink-0 bg-[#0F3457] text-white md:flex md:min-h-screen md:flex-col md:p-6">
         <SidebarContent
           onClose={() => setDrawerOpen(false)}
           onLogout={handleLogout}
         />
       </aside>
 
-      {/* Mobile drawer overlay */}
-      {drawerOpen && (
-        <div
-          className="md:hidden fixed inset-0 bg-black/50 z-50"
-          onClick={() => setDrawerOpen(false)}
-        />
-      )}
+      {/* Overlay */}
+      <div
+        onClick={() => setDrawerOpen(false)}
+        className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 md:hidden ${
+          drawerOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible"
+        }`}
+      />
 
-      {/* Mobile drawer panel */}
+      {/* Mobile Drawer */}
       <aside
-        className={`md:hidden fixed top-0 left-0 h-full w-64 bg-[#0F3457] text-white flex flex-col p-6 z-50 transition-transform duration-300 ${
-          drawerOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed left-0 top-0 z-50 flex h-screen w-72 flex-col bg-[#0F3457] p-6 text-white shadow-2xl transition-transform duration-300 md:hidden ${
+          drawerOpen
+            ? "translate-x-0"
+            : "-translate-x-full"
         }`}
       >
-        <button
-          onClick={() => setDrawerOpen(false)}
-          className="self-end mb-4 text-white/70 hover:text-white cursor-pointer"
-          aria-label="Close menu"
-        >
-          <X size={22} />
-        </button>
+        <div className="mb-5 flex justify-end">
+          <button
+            onClick={() => setDrawerOpen(false)}
+            className="rounded-lg p-2 hover:bg-white/10"
+          >
+            <X size={22} />
+          </button>
+        </div>
+
         <SidebarContent
           onClose={() => setDrawerOpen(false)}
           onLogout={handleLogout}

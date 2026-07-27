@@ -5,7 +5,7 @@ import { Truck, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import { toast } from "@heroui/react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 const productImages = [
   "/KJG-01.webp",
   "/KJG-02.webp",
@@ -339,31 +339,32 @@ const Order = () => {
                 </div>
               </div>
 
-              {/* Submit */}
-              <button
-                type="submit"
-                className="w-full bg-[#1B4C7E] hover:bg-[#0F3457] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#0F3457]/20 cursor-pointer"
-              >
-                অর্ডার করুন
-              </button>
+              <div className="mt-3 flex flex-col gap-3 sm:gap-4">
+                {/* Order Button */}
+                <button
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-2 rounded-full bg-[#1B4C7E] py-4 text-base font-semibold text-white shadow-lg shadow-[#0F3457]/20 transition hover:bg-[#0F3457]"
+                >
+                  অর্ডার করুন
+                </button>
 
-              {/* WhatsApp order */}
-              <div className="flex items-center justify-center gap-2 mt-3">
+                {/* WhatsApp Button */}
                 <button
                   type="button"
                   onClick={handleWhatsappOrder}
-                  className="w-full flex items-center justify-center gap-1 bg-[#1ac157] hover:bg-[#077a30] text-white font-sans font-semibold text-md py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
+                  className="w-full flex items-center justify-center cursor-pointer gap-2 rounded-full bg-[#25D366] py-4 text-base font-semibold text-white shadow-lg shadow-[#25D366]/20 transition hover:bg-[#1DA851]"
                 >
                   <FaWhatsapp size={20} />
                   হোয়াটসঅ্যাপে অর্ডার করুন
                 </button>
 
+                {/* Call Button */}
                 <a
                   href="tel:+8801673009016"
-                  className="w-full flex items-center justify-center gap-2 bg-[#128C7E] hover:bg-[#075E54] text-white font-sans font-semibold text-base py-4 rounded-full shadow-lg shadow-[#25D366]/20 cursor-pointer"
+                  className="w-full flex items-center justify-center cursor-pointer gap-2 rounded-full bg-[#128C7E] py-4 text-base font-semibold text-white shadow-lg shadow-[#128C7E]/20 transition hover:bg-[#075E54]"
                 >
-                  <FaPhoneAlt size={16} />
-                  Call Now
+                  <FaPhoneAlt size={18} />
+                  এখনই কল করুন
                 </a>
               </div>
             </form>

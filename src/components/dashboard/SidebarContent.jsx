@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
@@ -47,13 +48,34 @@ const SidebarContent = ({ onClose, onLogout }) => {
 
   return (
     <>
+      {/* Logo */}
+      <div className="mb-8 flex items-center gap-3 border-b border-white/10 pb-6">
+        <Link href={"/"}>
+          <Image
+            src="/logo.jpg"
+            alt="Karkuma"
+            width={52}
+            height={52}
+            className="rounded-full"
+          />
+        </Link>
+
+        <div>
+          <Link href="/" className="text-lg font-bold text-white">
+            তাহদীথ শপ
+          </Link>
+
+          <p className="text-sm text-white/60">Admin Dashboard</p>
+        </div>
+      </div>
+
       {/* Admin Info */}
       <div className="mb-8 border-b border-white/10 pb-6">
-        <p className="text-xs uppercase tracking-wider text-white/50">
+        <p className="text-xs uppercase tracking-widest text-white/50">
           Logged in as
         </p>
 
-        <h2 className="mt-2 text-lg font-semibold text-white wrap-break-word">
+        <h2 className="mt-2 text-lg font-semibold text-white break-words">
           {isPending ? "Loading..." : adminName}
         </h2>
       </div>
@@ -67,33 +89,39 @@ const SidebarContent = ({ onClose, onLogout }) => {
             item.href === "/dashboard/admin"
               ? pathname === item.href
               : pathname === item.href || pathname.startsWith(`${item.href}/`);
+
           return (
             <Link
               key={item.href}
               href={item.href}
               onClick={onClose}
-              className={`flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200 ${
+              className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
                 isActive
-                  ? "bg-white text-[#0F3457] shadow-md"
+                  ? "bg-white text-[#0F3457] shadow-lg"
                   : "text-white/70 hover:bg-white/10 hover:text-white"
               }`}
             >
-              <Icon size={18} />
+              <Icon size={19} />
               <span>{item.label}</span>
             </Link>
           );
         })}
-      </nav>
 
-      {/* Logout */}
-      <div className="mt-6 border-t border-white/10 pt-6">
+        {/* Logout */}
         <button
           onClick={onLogout}
-          className="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-red-300 transition hover:bg-red-500/15 hover:text-red-200 cursor-pointer"
+          className="mt-4 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium bg-red-500 text-white transition-all duration-200 hover:bg-red-700 hover:text-red-200 cursor-pointer"
         >
-          <LogOut size={18} />
+          <LogOut size={19} />
           Logout
         </button>
+      </nav>
+
+      {/* Footer */}
+      <div className="mt-8 border-t border-white/10 pt-5">
+        <p className="text-xs text-white/40 text-center">
+          © {new Date().getFullYear()} তাহদীথ শপ
+        </p>
       </div>
     </>
   );
