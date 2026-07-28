@@ -21,7 +21,7 @@ const LoginPage = () => {
     });
 
     if (signInError) {
-      setError('Wron Credentials');
+      setError('Wrong Credentials');
       setLoading(false);
       return;
     }
@@ -65,7 +65,7 @@ const LoginPage = () => {
         <button
           type="submit"
           disabled={loading}
-          className="bg-[#0F3457] hover:bg-[#1B4C7E] text-white font-semibold py-3 rounded-full transition-colors disabled:opacity-60"
+          className="bg-[#0F3457] hover:bg-[#1B4C7E] cursor-pointer text-white font-semibold py-3 rounded-full transition-colors disabled:opacity-60"
         >
           {loading ? 'Logging in...' : 'Login'}
         </button>
