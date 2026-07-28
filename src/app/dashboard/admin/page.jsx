@@ -27,9 +27,15 @@ const AdminDashboardHomepage = async () => {
   const orders = await getOrders();
 
   const totalOrders = orders.length;
-  const pendingOrders = orders.filter((o) => o.orderStatus === "Pending").length;
-  const confirmedOrders = orders.filter((o) => o.orderStatus === "Confirmed").length;
-  const cancelledOrders = orders.filter((o) => o.orderStatus === "Cancelled").length;
+  const pendingOrders = orders.filter(
+    (o) => o.orderStatus === "Pending",
+  ).length;
+  const confirmedOrders = orders.filter(
+    (o) => o.orderStatus === "Confirmed",
+  ).length;
+  const cancelledOrders = orders.filter(
+    (o) => o.orderStatus === "Cancelled",
+  ).length;
 
   const totalRevenue = orders
     .filter((o) => o.orderStatus === "Confirmed")
@@ -90,14 +96,16 @@ const AdminDashboardHomepage = async () => {
                 <p className="text-2xl font-serif font-bold text-[#0F3457]">
                   {stat.value}
                 </p>
-                <p className="text-xs text-[#1C2530]/60 font-sans">{stat.label}</p>
+                <p className="text-xs text-[#1C2530]/60 font-sans">
+                  {stat.label}
+                </p>
               </div>
             </div>
           );
         })}
       </div>
 
-      <Chart/>
+      <Chart />
 
       {/* Revenue card */}
       <div className="bg-[#0F3457] rounded-2xl p-6 mb-8 flex items-center gap-4">
@@ -133,21 +141,44 @@ const AdminDashboardHomepage = async () => {
             <table className="w-full text-sm">
               <thead className="bg-[#F1F5F9] text-[#0F3457] text-left">
                 <tr>
-                  <th className="px-5 py-3 font-semibold">নাম</th>
-                  <th className="px-5 py-3 font-semibold">ফোন</th>
-                  <th className="px-5 py-3 font-semibold">প্যাক</th>
-                  <th className="px-5 py-3 font-semibold">মূল্য</th>
-                  <th className="px-5 py-3 font-semibold">স্ট্যাটাস</th>
+                  <th className="px-5 py-3 font-semibold">Name</th>
+                  <th className="px-5 py-3 font-semibold">Phone</th>
+                  <th className="px-5 py-3 font-semibold">Unit</th>
+                  <th className="px-5 py-3 font-semibold">Price</th>
+                  <th className="px-5 py-3 font-semibold">Date</th>
+                  <th className="px-5 py-3 font-semibold">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {recentOrders.map((order) => (
                   <tr key={order._id} className="border-t border-[#0F3457]/5">
-                    <td className="px-5 py-3 font-medium text-[#1C2530]">{order.name}</td>
-                    <td className="px-5 py-3 text-[#1C2530]/80">{order.phone}</td>
-                    <td className="px-5 py-3 text-[#1C2530]/80">{order.pack}</td>
+                    <td className="px-5 py-3 font-bold text-[#1C2530]">
+                      {order.name}
+                    </td>
+                    <td className="px-5 py-3 font-semibold text-[#1C2530]/80">
+                      {order.phone}
+                    </td>
+                    <td className="px-5 py-3 font-semibold text-[#1C2530]/80">
+                      {order.quantity}
+                    </td>
                     <td className="px-5 py-3 font-semibold text-[#0F3457]">
                       ৳{order.totalPrice}
+                    </td>
+                    <td className="px-6 py-4 text-xs">
+                      <div>
+                        {new Date(order.createdAt).toLocaleDateString("en-GB", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "2-digit",
+                        })}
+                      </div>
+
+                      <div className="text-xs text-slate-500">
+                        {new Date(order.createdAt).toLocaleTimeString("en-GB", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
                     </td>
                     <td className="px-5 py-3">
                       <span

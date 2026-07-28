@@ -124,7 +124,7 @@ const Orders = () => {
               <tr>
 
                 <th className="px-6 py-4 text-left text-sm font-semibold">
-                  Customer
+                  Name
                 </th>
 
                 <th className="px-6 py-4 text-left text-sm font-semibold">
@@ -132,7 +132,7 @@ const Orders = () => {
                 </th>
 
                 <th className="px-6 py-4 text-left text-sm font-semibold">
-                  Pack
+                  Unit
                 </th>
 
                 <th className="px-6 py-4 text-left text-sm font-semibold">
@@ -172,8 +172,8 @@ const Orders = () => {
                     {order.phone}
                   </td>
 
-                  <td className="px-6 text-xs py-4">
-                    {order.pack}
+                  <td className="px-6 text-xs py-4 font-bold">
+                    {order.quantity}
                   </td>
 
                   <td className="px-6 py-4 text-xs font-semibold text-[#0F3457]">
