@@ -71,29 +71,46 @@ export default function OrderTable({ ordersData }) {
         </Table.Content>
       </Table.ScrollContainer>
 
+      {/* PAGINATION */}
       <Table.Footer>
-        <Pagination size="sm">
-          {/* <Pagination.Summary>
-            {start} to {end} of {users.length} results
-          </Pagination.Summary> */}
+        <Pagination size="sm" className="flex w-full justify-center">
           <Pagination.Content>
             <Pagination.Item>
-              <Pagination.Previous isDisabled={page === 1}>
-                <Pagination.PreviousIcon />
-                Prev
+              <Pagination.Previous className="font-bold" isDisabled={page === 1}>
+                <Link
+                  className="flex gap-2"
+                  href={`/dashboard/admin/orders?page=${page - 1}`}
+                >
+                  <Pagination.PreviousIcon />
+                </Link>
               </Pagination.Previous>
             </Pagination.Item>
+
             {pages.map((p) => (
               <Pagination.Item key={p}>
                 <Link href={`/dashboard/admin/orders?page=${p}`}>
-                  <Pagination.Link isActive={p === page}>{p}</Pagination.Link>
+                  <Pagination.Link
+                    isActive={p === page}
+                    className={`rounded-lg px-3 py-1 font-semibold transition ${
+                      p === page
+                        ? "bg-[#0F3457] text-white"
+                        : "bg-transparent text-slate-700 hover:bg-slate-100"
+                    }`}
+                  >
+                    {p}
+                  </Pagination.Link>
                 </Link>
               </Pagination.Item>
             ))}
+
             <Pagination.Item>
-              <Pagination.Next isDisabled={page === totalPages}>
-                Next
-                <Pagination.NextIcon />
+              <Pagination.Next className="font-bold" isDisabled={page === totalPages}>
+                <Link
+                  className="flex gap-2"
+                  href={`/dashboard/admin/orders?page=${page + 1}`}
+                >
+                  <Pagination.NextIcon />
+                </Link>
               </Pagination.Next>
             </Pagination.Item>
           </Pagination.Content>
