@@ -4,14 +4,54 @@ import { Pagination, Table } from "@heroui/react";
 import StatusSelect from "./StatusSelect";
 import Link from "next/link";
 
+// Generates a compact page list like [1, '...', 5, 6, 7, '...', 17]
+function getPaginationRange(current, total, siblingCount = 1) {
+  const totalPageNumbers = siblingCount * 2 + 5;
+
+  if (totalPageNumbers >= total) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  const leftSibling = Math.max(current - siblingCount, 1);
+  const rightSibling = Math.min(current + siblingCount, total);
+
+  const showLeftDots = leftSibling > 2;
+  const showRightDots = rightSibling < total - 1;
+
+  if (!showLeftDots && showRightDots) {
+    const leftRange = Array.from(
+      { length: 3 + siblingCount * 2 },
+      (_, i) => i + 1
+    );
+    return [...leftRange, "...", total];
+  }
+
+  if (showLeftDots && !showRightDots) {
+    const rightCount = 3 + siblingCount * 2;
+    const rightRange = Array.from(
+      { length: rightCount },
+      (_, i) => total - rightCount + 1 + i
+    );
+    return [1, "...", ...rightRange];
+  }
+
+  if (showLeftDots && showRightDots) {
+    const middleRange = Array.from(
+      { length: rightSibling - leftSibling + 1 },
+      (_, i) => leftSibling + i
+    );
+    return [1, "...", ...middleRange, "...", total];
+  }
+}
+
 export default function OrderTable({ ordersData }) {
   const orders = ordersData.data;
   const page = ordersData.page;
-  const pages = [];
   const totalPages = ordersData.totalPage;
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(i);
-  }
+
+  // Fewer siblings on mobile keeps the row short
+  const pages = getPaginationRange(page, totalPages, 1);
+
   return (
     <Table>
       <Table.ScrollContainer>
@@ -73,8 +113,8 @@ export default function OrderTable({ ordersData }) {
 
       {/* PAGINATION */}
       <Table.Footer>
-        <Pagination size="sm" className="flex w-full justify-center">
-          <Pagination.Content>
+        <Pagination size="sm" className="flex w-full justify-center flex-wrap gap-1 px-2">
+          <Pagination.Content className="flex-wrap justify-center gap-1">
             <Pagination.Item>
               <Pagination.Previous className="font-bold" isDisabled={page === 1}>
                 <Link
@@ -86,22 +126,28 @@ export default function OrderTable({ ordersData }) {
               </Pagination.Previous>
             </Pagination.Item>
 
-            {pages.map((p) => (
-              <Pagination.Item key={p}>
-                <Link href={`/dashboard/admin/orders?page=${p}`}>
-                  <Pagination.Link
-                    isActive={p === page}
-                    className={`rounded-lg px-3 py-1 font-semibold transition ${
-                      p === page
-                        ? "bg-[#0F3457] text-white"
-                        : "bg-transparent text-slate-700 hover:bg-slate-100"
-                    }`}
-                  >
-                    {p}
-                  </Pagination.Link>
-                </Link>
-              </Pagination.Item>
-            ))}
+            {pages.map((p, idx) =>
+              p === "..." ? (
+                <Pagination.Item key={`dots-${idx}`}>
+                  <span className="px-2 text-slate-400 select-none">…</span>
+                </Pagination.Item>
+              ) : (
+                <Pagination.Item key={p}>
+                  <Link href={`/dashboard/admin/orders?page=${p}`}>
+                    <Pagination.Link
+                      isActive={p === page}
+                      className={`rounded-lg px-3 py-1 font-semibold transition ${
+                        p === page
+                          ? "bg-[#0F3457] text-white"
+                          : "bg-transparent text-slate-700 hover:bg-slate-100"
+                      }`}
+                    >
+                      {p}
+                    </Pagination.Link>
+                  </Link>
+                </Pagination.Item>
+              )
+            )}
 
             <Pagination.Item>
               <Pagination.Next className="font-bold" isDisabled={page === totalPages}>

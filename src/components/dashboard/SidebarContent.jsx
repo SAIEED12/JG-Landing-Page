@@ -9,8 +9,8 @@ import {
   LayoutDashboard,
   ShoppingBag,
   Package,
-  Settings,
   LogOut,
+  User,
 } from "lucide-react";
 
 const navItems = [
@@ -32,7 +32,7 @@ const navItems = [
   {
     label: "Profile",
     href: "/dashboard/admin/profile",
-    icon: Settings,
+    icon: User,
   },
 ];
 
