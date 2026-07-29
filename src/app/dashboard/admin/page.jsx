@@ -8,23 +8,24 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Chart from "@/components/Chart";
+import { getAllOrders } from "@/lib/api";
 
-async function getOrders() {
-  const apiURL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
+// async function getOrders() {
+//   const apiURL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
 
-  const res = await fetch(`${apiURL}/orders`, {
-    cache: "no-store",
-  });
+//   const res = await fetch(`${apiURL}/orders`, {
+//     cache: "no-store",
+//   });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch orders");
-  }
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch orders");
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
 
 const AdminDashboardHomepage = async () => {
-  const orders = await getOrders();
+  const orders = await getAllOrders()
 
   const totalOrders = orders.length;
   const pendingOrders = orders.filter(
