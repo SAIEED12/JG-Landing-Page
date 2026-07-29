@@ -6,6 +6,7 @@ import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import { toast } from "@heroui/react";
 import { useRouter } from "next/navigation";
+
 const productImages = [
   "/KJG-01.webp",
   "/KJG-02.webp",
@@ -41,6 +42,34 @@ const toBengaliNumber = (num) =>
 
 const WHATSAPP_NUMBER = "8801673009016";
 
+// International-friendly: optional leading +, then 7-20 chars of digits/spaces/dashes/parens
+const PHONE_REGEX = /^\+?[0-9\s\-()]{7,20}$/;
+
+const validateForm = ({ name, phone, address }) => {
+  const errors = {};
+
+  const trimmedName = name.trim();
+  if (!trimmedName) {
+    errors.name = "Name is required";
+  } else if (trimmedName.length < 3) {
+    errors.name = "Name must be at least 3 characters";
+  }
+
+  const trimmedPhone = phone.trim();
+  if (!trimmedPhone) {
+    errors.phone = "Phone number is required";
+  } else if (!PHONE_REGEX.test(trimmedPhone)) {
+    errors.phone = "Please enter a valid phone number";
+  }
+
+  const trimmedAddress = address.trim();
+  if (!trimmedAddress) {
+    errors.address = "Address is required";
+  }
+
+  return errors;
+};
+
 const Order = () => {
   const [selectedPack, setSelectedPack] = useState(packOptions[0]);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -49,22 +78,46 @@ const Order = () => {
     phone: "",
     address: "",
   });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear that field's error as soon as the user edits it
+    setErrors((prev) => {
+      if (!prev[name]) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
   };
 
   const totalPrice = selectedPack.price;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      // toast("Please fix the form", {
+      //   description: "Some fields need your attention.",
+      //   variant: "danger",
+      //   timeout: 4000,
+      // });
+      return;
+    }
+
     const apiURL =
       process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
 
     const orderDetails = {
-      name: formData.name,
-      phone: formData.phone,
-      address: formData.address,
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      address: formData.address.trim(),
 
       pack: selectedPack.label,
       quantity: selectedPack.packs,
@@ -76,6 +129,7 @@ const Order = () => {
       createdAt: new Date().toISOString(),
     };
 
+    setIsSubmitting(true);
     try {
       const res = await fetch(`${apiURL}/orders`, {
         method: "POST",
@@ -102,6 +156,7 @@ const Order = () => {
       // Reset Form
       setFormData({ name: "", phone: "", address: "" });
       setSelectedPack(packOptions[0]);
+      setErrors({});
     } catch (err) {
       console.error("Order submission failed:", err);
       toast("অর্ডার সম্পন্ন হয়নি", {
@@ -109,14 +164,28 @@ const Order = () => {
         variant: "danger",
         timeout: 5000,
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
   const handleWhatsappOrder = () => {
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      // toast("Please fix the form", {
+      //   description: "Fix the details before sending to WhatsApp.",
+      //   variant: "danger",
+      //   timeout: 4000,
+      // });
+      return;
+    }
+
     const message =
       `আমি কারকুমা জয়েন্ট গার্ড অর্ডার করতে চাই।\n\n` +
-      `নাম: ${formData.name || "-"}\n` +
-      `ফোন: ${formData.phone || "-"}\n` +
-      `ঠিকানা: ${formData.address || "-"}\n` +
+      `নাম: ${formData.name.trim()}\n` +
+      `ফোন: ${formData.phone.trim()}\n` +
+      `ঠিকানা: ${formData.address.trim()}\n` +
       `প্যাক: ${selectedPack.label}\n` +
       `প্যাকের মূল্য: ৳${selectedPack.price}\n` +
       `ডেলিভারি চার্জ: ফ্রি\n` +
@@ -125,6 +194,13 @@ const Order = () => {
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
+
+  const inputClass = (field) =>
+    `w-full rounded-lg border bg-white px-4 py-3 font-sans text-sm text-[#1C2530] focus:outline-none focus:ring-2 ${
+      errors[field]
+        ? "border-red-400 focus:ring-red-200"
+        : "border-[#0F3457]/15 focus:ring-[#0F3457]/30"
+    }`;
 
   return (
     <div id="order" className="bg-[#e7eff8] py-16 md:py-24">
@@ -198,7 +274,7 @@ const Order = () => {
               করুন।
             </p>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
               {/* Pack selection */}
               <div>
                 <label className="block font-sans font-semibold text-[#0F3457] text-sm mb-3">
@@ -249,12 +325,18 @@ const Order = () => {
                 <input
                   type="text"
                   name="name"
-                  required
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="পুরো নাম লিখুন"
-                  className="w-full rounded-lg border border-[#0F3457]/15 bg-white px-4 py-3 font-sans text-sm text-[#1C2530] focus:outline-none focus:ring-2 focus:ring-[#0F3457]/30"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "name-error" : undefined}
+                  className={inputClass("name")}
                 />
+                {errors.name && (
+                  <p id="name-error" className="mt-1.5 text-xs font-medium text-red-500">
+                    {errors.name}
+                  </p>
+                )}
               </div>
 
               {/* Phone */}
@@ -265,12 +347,18 @@ const Order = () => {
                 <input
                   type="tel"
                   name="phone"
-                  required
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="01XXXXXXXXX"
-                  className="w-full rounded-lg border border-[#0F3457]/15 bg-white px-4 py-3 font-sans text-sm text-[#1C2530] focus:outline-none focus:ring-2 focus:ring-[#0F3457]/30"
+                  aria-invalid={!!errors.phone}
+                  aria-describedby={errors.phone ? "phone-error" : undefined}
+                  className={inputClass("phone")}
                 />
+                {errors.phone && (
+                  <p id="phone-error" className="mt-1.5 text-xs font-medium text-red-500">
+                    {errors.phone}
+                  </p>
+                )}
               </div>
 
               {/* Address */}
@@ -280,13 +368,19 @@ const Order = () => {
                 </label>
                 <textarea
                   name="address"
-                  required
                   rows={3}
                   value={formData.address}
                   onChange={handleChange}
                   placeholder="বাসা/হোল্ডিং, রোড, এলাকা, জেলা"
-                  className="w-full rounded-lg border border-[#0F3457]/15 bg-white px-4 py-3 font-sans text-sm text-[#1C2530] focus:outline-none focus:ring-2 focus:ring-[#0F3457]/30 resize-none"
+                  aria-invalid={!!errors.address}
+                  aria-describedby={errors.address ? "address-error" : undefined}
+                  className={`${inputClass("address")} resize-none`}
                 />
+                {errors.address && (
+                  <p id="address-error" className="mt-1.5 text-xs font-medium text-red-500">
+                    {errors.address}
+                  </p>
+                )}
               </div>
 
               {/* Payment method */}
@@ -343,9 +437,10 @@ const Order = () => {
                 {/* Order Button */}
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center cursor-pointer gap-2 rounded-full bg-[#1B4C7E] py-4 text-base font-semibold text-white shadow-lg shadow-[#0F3457]/20 transition hover:bg-[#0F3457]"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center cursor-pointer gap-2 rounded-full bg-[#1B4C7E] py-4 text-base font-semibold text-white shadow-lg shadow-[#0F3457]/20 transition hover:bg-[#0F3457] disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  অর্ডার করুন
+                  {isSubmitting ? "প্রসেসিং হচ্ছে..." : "অর্ডার করুন"}
                 </button>
 
                 {/* WhatsApp Button */}
