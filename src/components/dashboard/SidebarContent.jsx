@@ -24,14 +24,14 @@ const navItems = [
     href: "/dashboard/admin/orders",
     icon: ShoppingBag,
   },
+  // {
+  //   label: "Products",
+  //   href: "/dashboard/admin/products",
+  //   icon: Package,
+  // },
   {
-    label: "Products",
-    href: "/dashboard/admin/products",
-    icon: Package,
-  },
-  {
-    label: "Settings",
-    href: "/dashboard/admin/settings",
+    label: "Profile",
+    href: "/dashboard/admin/profile",
     icon: Settings,
   },
 ];
