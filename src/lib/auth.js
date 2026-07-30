@@ -17,6 +17,12 @@ export const auth = betterAuth({
       updateEmailWithoutVerification: true,
     },
   },
+    trustedOrigins: [
+    "http://localhost:3000",
+    // "https://your-domain.com",
+    "https://tahdith-shop-jg.vercel.app",
+  ],
+
   database: mongodbAdapter(db, {
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client,
