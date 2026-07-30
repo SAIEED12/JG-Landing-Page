@@ -1,12 +1,10 @@
 const dns = require("node:dns");
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
-
 import { Noto_Serif_Bengali, Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Toast } from "@heroui/react";
+import LayoutShell from "@/components/LayoutShell";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ["bengali", "latin"],
@@ -25,7 +23,7 @@ const notoSansBengali = Noto_Sans_Bengali({
 export const metadata = {
   title: "তাহদীথ শপ | Tahdith Shop",
   description: "The Organic Way of Life",
-  icons:{
+  icons: {
     icon: "/logo.jpg",
   },
 };
@@ -37,12 +35,13 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="bn" className={`${notoSerifBengali.variable} ${notoSansBengali.variable}`}>
+    <html
+      lang="bn"
+      className={`${notoSerifBengali.variable} ${notoSansBengali.variable}`}
+    >
       <body className="font-sans min-h-full flex flex-col">
         <Toast.Provider />
-        <Navbar />
-        {children}
-        <Footer/>
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   );

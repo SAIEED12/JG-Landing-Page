@@ -16,7 +16,6 @@ const LoginPage = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     const { error: signInError } = await authClient.signIn.email({
       email: form.email,
       password: form.password,

@@ -1,13 +1,30 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { CheckCircle2, ArrowLeft, PackageCheck } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const OrderSuccess = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#EAF3FB] via-white to-[#DCECF8] flex items-center justify-center px-6 py-10">
+    <div className="min-h-screen bg-linear-to-br from-[#EAF3FB] via-white to-[#DCECF8] flex items-center justify-center px-6 py-10">
       <div className="w-full max-w-2xl rounded-3xl bg-white shadow-2xl border border-slate-200 p-8 md:p-10 text-center">
+        {/* Logo */}
+        <div className="mx-auto mb-3 flex justify-center">
+          <Image
+            src="/logo.jpg"
+            alt="তাহদীথ শপ"
+            width={64}
+            height={64}
+            className="rounded-full"
+          />
+        </div>
+
+        {/* Shop Name */}
+        <h2 className="font-serif text-2xl md:text-3xl font-bold text-[#0F3457] mb-2">
+          তাহদীথ শপ
+        </h2>
+
         {/* Success Icon */}
         <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-green-100">
           <CheckCircle2 className="h-14 w-14 text-green-600" />
@@ -33,11 +50,12 @@ const OrderSuccess = () => {
             {/* <PackageCheck className="text-[#0F3457] mt-1" size={24} /> */}
 
             <div>
-
               <ul className="mt-4 space-y-3 text-slate-700 list-disc list-inside">
                 <li>আমাদের প্রতিনিধি আপনাকে ফোন করে অর্ডার নিশ্চিত করবেন।</li>
 
-                <li>অর্ডার নিশ্চিত হওয়ার পর পণ্যটি দ্রুত পাঠিয়ে দেওয়া হবে।</li>
+                <li>
+                  অর্ডার নিশ্চিত হওয়ার পর পণ্যটি দ্রুত পাঠিয়ে দেওয়া হবে।
+                </li>
 
                 <li>পণ্য হাতে পাওয়ার পর মূল্য পরিশোধ করবেন।</li>
               </ul>

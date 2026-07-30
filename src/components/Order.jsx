@@ -42,8 +42,7 @@ const toBengaliNumber = (num) =>
 
 const WHATSAPP_NUMBER = "8801673009016";
 
-// International-friendly: optional leading +, then 7-20 chars of digits/spaces/dashes/parens
-const PHONE_REGEX = /^\+?[0-9\s\-()]{7,20}$/;
+const PHONE_REGEX = /^\d{11}$/;
 
 const validateForm = ({ name, phone, address }) => {
   const errors = {};

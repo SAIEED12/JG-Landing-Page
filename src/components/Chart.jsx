@@ -12,6 +12,7 @@ import {
   Legend,
 } from "recharts";
 import { getAllOrders } from "@/lib/api";
+import AdminLoader from "@/components/dashboard/AdminLoader";
 
 const monthNames = [
   "Jan",
@@ -100,7 +101,7 @@ const chartData = useMemo(() => {
   if (loading) {
     return (
       <div className="w-full h-[420px] bg-white rounded-xl p-4 flex items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-300 border-t-[#0F3457]" />
+        <AdminLoader size="md" />
       </div>
     );
   }

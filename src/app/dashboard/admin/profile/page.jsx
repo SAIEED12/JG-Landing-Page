@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient, useSession } from "@/lib/auth-client";
 import { User, Mail, Lock, CheckCircle2, AlertCircle, Eye, EyeOff } from "lucide-react";
+import AdminLoader from "@/components/dashboard/AdminLoader";
 
 const Profile = () => {
   const router = useRouter();
@@ -27,11 +28,7 @@ const Profile = () => {
   const [passwordLoading, setPasswordLoading] = useState(false);
 
   if (isPending) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#0F3457]" />
-      </div>
-    );
+    return <AdminLoader fullPage size="lg" text="Loading..." />;
   }
 
   const handleUpdateName = async (e) => {
