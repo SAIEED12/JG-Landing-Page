@@ -31,7 +31,6 @@ const OrdersPage = async ({ searchParams }) => {
         <h2 className="mt-10 mb-5 font-bold text-2xl text-[#0F3457]">
           All Orders
         </h2>
-
         <Searchbar />
       </div>
       {search && (
