@@ -26,8 +26,15 @@ import { getServerAuthToken } from "@/lib/server-auth-token";
 // }
 
 const AdminDashboardHomepage = async () => {
-  const token = await getServerAuthToken();
-  const orders = await getAllOrders(token)
+  let orders = [];
+  let error = null;
+
+  try {
+    const token = await getServerAuthToken();
+    orders = await getAllOrders(token);
+  } catch {
+    error = "Failed to load orders. Please try again later.";
+  }
 
   const totalOrders = orders.length;
   const pendingOrders = orders.filter(
@@ -80,6 +87,12 @@ const AdminDashboardHomepage = async () => {
       <h1 className="font-serif font-bold text-2xl text-[#0F3457] mb-6 mt-5">
         Overview
       </h1>
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 rounded-2xl px-5 py-4 mb-6 font-sans text-sm">
+          {error}
+        </div>
+      )}
 
       {/* Stat cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">

@@ -3,7 +3,7 @@ import { authClient } from "@/lib/auth-client";
 const apiURL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
 
 export async function getClientAuthToken() {
-  const { data } = await authClient.getToken();
+  const { data } = await authClient.token();
   return data?.token;
 }
 
