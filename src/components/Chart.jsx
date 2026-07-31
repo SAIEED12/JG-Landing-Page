@@ -11,7 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { getAllOrders } from "@/lib/api";
+import { getAllOrders, getClientAuthToken } from "@/lib/api";
 import AdminLoader from "@/components/dashboard/AdminLoader";
 
 const monthNames = [
@@ -37,7 +37,8 @@ const Chart = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const data = await getAllOrders();
+        const token = await getClientAuthToken();
+        const data = await getAllOrders(token);
         setOrders(data);
       } catch (err) {
         console.error("Error fetching orders:", err);

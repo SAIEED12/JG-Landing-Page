@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Chart from "@/components/Chart";
 import { getAllOrders } from "@/lib/api";
+import { getServerAuthToken } from "@/lib/server-auth-token";
 
 // async function getOrders() {
 //   const apiURL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
@@ -25,7 +26,8 @@ import { getAllOrders } from "@/lib/api";
 // }
 
 const AdminDashboardHomepage = async () => {
-  const orders = await getAllOrders()
+  const token = await getServerAuthToken();
+  const orders = await getAllOrders(token)
 
   const totalOrders = orders.length;
   const pendingOrders = orders.filter(

@@ -1,21 +1,8 @@
 import Searchbar from "@/components/dashboard/Searchbar";
 import OrderTable from "@/components/OrderTable";
 import React from "react";
-
-const getOrders = async (page = 1, search = "") => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/orders?page=${page}&search=${encodeURIComponent(search)}`,
-    {
-      cache: "no-store",
-    },
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch orders");
-  }
-
-  return res.json();
-};
+import { getOrders } from "@/lib/api";
+import { getServerAuthToken } from "@/lib/server-auth-token";
 
 const OrdersPage = async ({ searchParams }) => {
   const params = await searchParams;
@@ -23,7 +10,8 @@ const OrdersPage = async ({ searchParams }) => {
   const page = params?.page || 1;
   const search = params?.search || "";
 
-  const orders = await getOrders(page, search);
+  const token = await getServerAuthToken();
+  const orders = await getOrders(page, search, token);
 
   return (
     <div>

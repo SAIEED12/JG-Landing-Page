@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { getClientAuthToken } from "@/lib/api";
 
 const StatusSelect = ({ orderId, status }) => {
   const router = useRouter();
@@ -15,10 +16,12 @@ const StatusSelect = ({ orderId, status }) => {
     setUpdating(true);
 
     try {
+      const token = await getClientAuthToken();
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/orders/${orderId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ orderStatus: newStatus }),
       });
